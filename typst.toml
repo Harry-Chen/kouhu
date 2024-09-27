@@ -8,4 +8,4 @@ description = "Chinese lipsum text generator; 中文乱数假文（Lorem Ipsum�
 repository = "https://github.com/Harry-Chen/kouhu"
 categories = ["utility"]
 keywords = ["lorem", "lorem ipsum", "lipsum", "dummy text", "blind text", "placeholder", "chinese"]
-exclude = ["docs/*"]
+exclude = ["docs/*", "utils/*"]
