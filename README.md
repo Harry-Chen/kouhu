@@ -18,7 +18,7 @@ All [sample text](data/zhlipsum.json) is excerpted from `zhlipsum` LaTeX package
 #kouhu(custom-text: ("Foo", "Bar")) // provide your own text
 ```
 
-See [manual](https://github.com/Harry-Chen/kouhu/blob/main/doc/manual.pdf) for more details.
+See [manual](https://github.com/Harry-Chen/kouhu/blob/master/doc/manual.pdf) for more details.
 
 ## What does `kouhu` mean?
 
@@ -39,5 +39,5 @@ GitHub Copilot says:
 First download the `zhlipsum-text.dtx` from [CTAN](https://ctan.org/pkg/zhlipsum) or from local TeX Live (`kpsewhich zhlipsum-text.dtx`). Then run:
 
 ```bash
-python3 utils/generate_zhlipsum.py /path/tozhlipsum-text.dtx src/zhlipsum.json
+python3 utils/generate_zhlipsum.py /path/to/zhlipsum-text.dtx src/zhlipsum.json
 ```
