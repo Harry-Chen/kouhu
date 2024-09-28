@@ -1,6 +1,6 @@
 # kouhu (口胡)
 
-`kouku` is a Chinese lipsum text generator for [Typst](https://typst.app). It provides a set of built-in text samples containing both Simplified and Traditional Chinese characters. You can choose from generated fake text, classic or modern Chinese literature, or specify your own text.
+`kouhu` (口胡) is a Chinese lipsum text generator for [Typst](https://typst.app). It provides a set of built-in text samples containing both Simplified and Traditional Chinese characters. You can choose from generated fake text, classic or modern Chinese literature, or specify your own text.
 
 `kouhu` is inspired by [zhlipsum](https://ctan.org/pkg/zhlipsum) LaTeX package and [roremu](https://typst.app/universe/package/roremu) Typst package.
 
