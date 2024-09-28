@@ -28,9 +28,15 @@ GitHub Copilot says:
 
 ## Changelog
 
+### 0.1.1
+
+* Fix some wrong paths in `README.md`.
+* Fix genearation of `indicies` when not specified by user.
+* Add repetition of text until `length` is reached.
+
 ### 0.1.0
 
-* Initial release
+* Initial release.
 
 ## Appendix
 

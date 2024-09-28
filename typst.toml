@@ -1,6 +1,6 @@
 [package]
 name = "kouhu"
-version = "0.1.0"
+version = "0.1.1"
 entrypoint = "lib.typ"
 authors = ["Shengqi Chen <harry-chen@outlook.com>"]
 license = "MIT"
