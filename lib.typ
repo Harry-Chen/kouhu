@@ -11,15 +11,18 @@
 
 /// Output selected Chinese lorem ipsum paragraphs.
 ///
-/// *Example:*
-/// Cut from paragraphs from Lu Xun's _Zhufu_（《祝福》）.
+/// *Example 1:*
+/// Cut some paragraphs from Lu Xun's _Zhufu_（《祝福》）.
 /// #example(`#kouhu(builtin-text: "zhufu", offset: 5, indicies: (2, 18), length: 31, between-para: "——")`, mode: "markup")
 ///
+/// *Example 2:*
+/// Repeat some text until the specified length.
+/// #example(`#kouhu(custom-text: ("奥利",), between-para: none, length: 31)`, mode: "markup")
 /// - builtin-text (string): Name of the builtin text, see @@builtin-text-list() for a full list and length.
 /// - custom-text (array): Custom text to use. If not `none`, `builtin-text` will be ignored.
 /// - offset (int): Offset of the paragraph to start from.
 /// - indicies (array): Indicies (*NOT RANGE*) of paragraphs to use (`offset` will be added). `none` means all paragraphs. Any out-of-bound index will be ignored.
-/// - length (int): Length of graphme (characters) to print, the final paragraph will be truncated. 0 for unlimited (i.e. print all selected paragraphs from the text you specify).
+/// - length (int): Length of graphme (characters) to print. `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
 /// - before-para (content): Content inserted before each paragraph.
 /// - after-para (content): Content inserted after each paragraph.
 /// - between-para (content): Content inserted between two paragraphs (has no effect if only one paragraph is selected).
@@ -49,26 +52,35 @@
   // normalize indicies
   let selected_para = ()
   if indicies == none {
-    indicies = range(0, text.len())
+    indicies = range(1, text.len() + 1)
   }
 
   // select paragraphs according to argument, and
   // truncate to specified length of graphme
+  let length_set = false
   let remaining = 1e10 // use a large number here
   if length > 0 {
     remaining = length
+    length_set = true
   }
-  for i in indicies {
-    let i_ = i + offset - 1
-    if i_ >= 0 and i_ < text.len() {
-      let t = text.at(i_).clusters()
-      if t.len() > remaining {
-        selected_para.push(t.slice(0, remaining).join())
-        break
-      } else {
-        selected_para.push(t.join())
-        remaining -= t.len()
+  while remaining > 0 {
+    for i in indicies {
+      let i_ = i + offset - 1
+      if i_ >= 0 and i_ < text.len() {
+        let t = text.at(i_).clusters()
+        if t.len() > remaining {
+          selected_para.push(t.slice(0, remaining).join())
+          remaining = 0
+          break
+        } else {
+          selected_para.push(t.join())
+          remaining -= t.len()
+        }
       }
+    }
+    // break if user does not specify length
+    if not length_set {
+      break
     }
   }
 
@@ -88,5 +100,4 @@
     i += 1
   }
 
-  // TODO: add a parameter to allow repetition of paragraphs
 }
