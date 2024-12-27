@@ -16,7 +16,7 @@
 /// #example(`#kouhu(builtin-text: "zhufu", indices: 18, length: 99)`, mode: "markup")
 ///
 /// *Example 2:*
-/// Cut multiple paragraphs from Lu Xun's _Zhufu_（《祝福》）.
+/// Cut multiple paragraphs from _Zhufu_.
 /// #example(`#kouhu(builtin-text: "zhufu", offset: 5, indices: (2, 18), length: 31, between-para: "——")`, mode: "markup")
 ///
 /// *Example 3:*

@@ -1,6 +1,6 @@
 # kouhu (口胡)
 
-`kouhu` (口胡) is a Chinese lipsum text generator for [Typst](https://typst.app). It provides a set of built-in text samples containing both Simplified and Traditional Chinese characters. You can choose from generated fake text, classic or modern Chinese literature, or specify your own text.
+[`kouhu`](https://typst.app/universe/package/kouhu) (口胡) is a Chinese lipsum text generator for [Typst](https://typst.app). It provides a set of built-in text samples containing both Simplified and Traditional Chinese characters. You can choose from generated fake text, classic or modern Chinese literature, or specify your own text.
 
 `kouhu` is inspired by [zhlipsum](https://ctan.org/pkg/zhlipsum) LaTeX package and [roremu](https://typst.app/universe/package/roremu) Typst package.
 
@@ -27,6 +27,11 @@ GitHub Copilot says:
 > `kouhu` (口胡) is a Chinese term for reading aloud without understanding the meaning. It is often used in the context of learning Chinese language or reciting Chinese literature.
 
 ## Changelog
+
+### 0.2.0
+
+* Rename misspelled parameter `indicies` to `indices`, and supports `int` as input (see: [#2](https://github.com/Harry-Chen/kouhu/pull/2)).
+* Include README on GitHub repository in the documentation.
 
 ### 0.1.1
 
