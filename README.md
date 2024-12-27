@@ -11,7 +11,7 @@ All [sample text](data/zhlipsum.json) is excerpted from `zhlipsum` LaTeX package
 ```typst
 #import "@preview/kouhu:0.1.0": kouhu
 
-#kouhu(index: range(1, 3)) // select the first 3 paragraphs from default text
+#kouhu(indices: range(1, 3)) // select the first 3 paragraphs from default text
 
 #kouhu(builtin-text: "zhufu", offset: 5, length: 100) // select 100 characters from the 5th paragraph of "zhufu" text
 

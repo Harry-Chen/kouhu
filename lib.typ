@@ -13,11 +13,11 @@
 ///
 /// *Example 1:*
 /// Cut the first several characters of a paragraph from Lu Xun's _Zhufu_（《祝福》）.
-/// #example(`#kouhu(builtin-text: "zhufu", index: 18, length: 99)`, mode: "markup")
+/// #example(`#kouhu(builtin-text: "zhufu", indices: 18, length: 99)`, mode: "markup")
 ///
 /// *Example 2:*
 /// Cut multiple paragraphs from Lu Xun's _Zhufu_（《祝福》）.
-/// #example(`#kouhu(builtin-text: "zhufu", offset: 5, index: (2, 18), length: 31, between-para: "——")`, mode: "markup")
+/// #example(`#kouhu(builtin-text: "zhufu", offset: 5, indices: (2, 18), length: 31, between-para: "——")`, mode: "markup")
 ///
 /// *Example 3:*
 /// Repeat some text until the specified length.
@@ -25,7 +25,7 @@
 /// - builtin-text (string): Name of the builtin text, see @@builtin-text-list() for a full list and length.
 /// - custom-text (array): Custom text to use. If not `none`, `builtin-text` will be ignored.
 /// - offset (int): Offset of the paragraph to start from.
-/// - index (int, array): Indices (*NOT RANGE*) of paragraphs to use (`offset` will be added). A single integer means a single paragraph, an array means multiple paragraphs, and `none` means all paragraphs. Any out-of-bound index will be ignored.
+/// - indices (int, array): Indices (*NOT RANGE*) of paragraphs to use (`offset` will be added). A single integer means a single paragraph, an array means multiple paragraphs, and `none` means all paragraphs. Any out-of-bound index will be ignored.
 /// - length (int): Length of grapheme (characters) to print. `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
 /// - before-para (content): Content inserted before each paragraph.
 /// - after-para (content): Content inserted after each paragraph.
@@ -35,7 +35,7 @@
   builtin-text: "simp",
   custom-text: none,
   offset: 0,
-  index: none,
+  indices: none,
   length: 0,
   before-para: none,
   after-para: none,
@@ -55,12 +55,12 @@
 
   // normalize indices
   let selected_para = ()
-  let indices = if index == none {
+  indices = if indices == none {
     range(1, text.len() + 1)
-  } else if type(index) == int {
-    (index,)
+  } else if type(indices) == int {
+    (indices,)
   } else {
-    index
+    indices
   }
 
   // select paragraphs according to argument, and
