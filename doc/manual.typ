@@ -27,7 +27,7 @@
     All builtin text samples are excerpted from `zhlipsum` (w/o non-UTF-8 paragraphs). Please refer to #link("http://mirrors.ctan.org/macros/latex/contrib/zhlipsum/zhlipsum-en.pdf")[its documentation] for detailed description.
     #text(font: "Noto Serif CJK SC", size: 10pt, (
       for k in builtin-text-list().keys() {[
-        + #raw(k): #kouhu(builtin-text: k, indicies: (1,), length: 70)
+        + #raw(k): #kouhu(builtin-text: k, indices: 1, length: 70)
         #parbreak()
       ]}
     ))
