@@ -1,13 +1,15 @@
-#import "@preview/mantys:0.1.4": *
-#import "@preview/tidy:0.2.0"
-#import "@preview/cmarker:0.1.1"
+#import "@preview/mantys:1.0.1": *
+#import "@preview/tidy:0.4.2"
+#import "@preview/cmarker:0.1.2"
 
-#import "/lib.typ": *
+#import "/lib.typ" as kouhu
 
-#show link: it => {
-  set text(fill: blue)
-  it
-}
+// ERROR: only element functions can be used as selector
+// what does that mean?
+// #show link: it => {
+//   set text(fill: blue)
+//   it
+// }
 
 #show raw: it => {
   set text(size: 10pt, font: "JetBrains Mono")
@@ -16,9 +18,8 @@
 
 #set page(paper: "a4")
 
-#let infos = toml("../typst.toml")
-#show: mantys.with(
-  ..infos,
+#show: mantys(
+  ..toml("../typst.toml"),
   title: "kǒuhú",
   subtitle: "口胡",
   date: datetime.today(),
@@ -28,26 +29,31 @@
     The idea of `kouhu` is inspired by #link("https://ctan.org/pkg/zhlipsum")[`zhlipsum`] LaTeX package and #link("https://typst.app/universe/package/roremu")[`roremu`] Typst package.
     All builtin text samples are excerpted from `zhlipsum` (w/o non-UTF-8 paragraphs). Please refer to #link("http://mirrors.ctan.org/macros/latex/contrib/zhlipsum/zhlipsum-en.pdf")[its documentation] for their detailed description.
     #text(font: "Noto Serif CJK SC", size: 10pt, (
-      for k in builtin-text-list().keys() {[
-        + #raw(k): #kouhu(builtin-text: k, indices: 1, length: 70)
+      for k in kouhu.builtin-text-list().keys() {[
+        + #raw(k): #kouhu.kouhu(builtin-text: k, indices: 1, length: 70)
         #parbreak()
       ]}
     ))
   ],
-  examples-scope: (kouhu: kouhu, builtin-text-list: builtin-text-list),
-  titlepage: titlepage.with(toc: false),
-  index: none
+  examples-scope: (
+    scope: (pkg: kouhu,),
+    imports: (pkg: "*")
+  ),
+  show-index: false,
+  show-outline: false,
+  show-urls-in-footnotes: false,
+  git: git-info((file) => read(file)),
 )
 
 = Usage
 
 #tidy-module(
+  "kouhu",
   read("../lib.typ"),
-  name: "Kouhu",
+  first-heading-level: 1,
+  show-module-name: false,
+  break-param-descriptions: true,
   show-outline: false,
-  include-examples-scope: true,
-  extract-headings: 1,
-  tidy: tidy
 )
 
 = GitHub README

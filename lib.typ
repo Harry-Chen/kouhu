@@ -22,7 +22,7 @@
 /// *Example 3:*
 /// Repeat some text until the specified length.
 /// #example(`#kouhu(custom-text: ("奥利",), between-para: none, length: 31)`, mode: "markup")
-/// - builtin-text (string): Name of the builtin text, see @@builtin-text-list() for a full list and length.
+/// - builtin-text (string): Name of the builtin text, see `builtin-text-list` for a full list and length.
 /// - custom-text (array): Custom text to use. If not `none`, `builtin-text` will be ignored.
 /// - offset (int): Offset of the paragraph to start from.
 /// - indices (int, array): Indices (*NOT RANGE*) of paragraphs to use (`offset` will be added). A single integer means a single paragraph, an array means multiple paragraphs, and `none` means all paragraphs. Any out-of-bound index will be ignored.
