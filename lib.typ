@@ -22,25 +22,63 @@
 /// *Example 3:*
 /// Repeat some text until the specified length.
 /// #example(`#kouhu(custom-text: ("奥利",), between-para: none, length: 31)`, mode: "markup")
+///
+/// *Example 4:*
+/// Use positional length argument.
+/// #example(`#kouhu(100)`, mode: "markup")
+///
+/// *Positional arguments:*
+/// - length (int): Length of grapheme (characters) to print (positional or named). When used positionally, it must be the first argument. `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
+///
+/// *Named arguments:*
 /// - builtin-text (string): Name of the builtin text, see `builtin-text-list` for a full list and length.
 /// - custom-text (array): Custom text to use. If not `none`, `builtin-text` will be ignored.
 /// - offset (int): Offset of the paragraph to start from.
 /// - indices (int, array): Indices (*NOT RANGE*) of paragraphs to use (`offset` will be added). A single integer means a single paragraph, an array means multiple paragraphs, and `none` means all paragraphs. Any out-of-bound index will be ignored.
-/// - length (int): Length of grapheme (characters) to print. `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
 /// - before-para (content): Content inserted before each paragraph.
 /// - after-para (content): Content inserted after each paragraph.
 /// - between-para (content): Content inserted between two paragraphs (has no effect if only one paragraph is selected).
 /// -> doc
 #let kouhu(
+  ..args,
   builtin-text: "simp",
   custom-text: none,
   offset: 0,
   indices: none,
-  length: 0,
   before-para: none,
   after-para: none,
   between-para: parbreak(),
 ) = {
+  // Handle positional and named length argument
+  // Named 'length' overrides positional argument if both are provided
+  let pos-args = args.pos()
+  let named-args = args.named()
+  
+  let length = 0  // default value
+  
+  // If positional argument is provided, use it as length
+  if pos-args.len() > 1 {
+    panic("kouhu accepts only one positional argument (length)")
+  }
+  if pos-args.len() > 0 {
+    if type(pos-args.at(0)) != int {
+      panic("Positional length argument must be an integer")
+    }
+    length = pos-args.at(0)
+  }
+  
+  // If named 'length' is provided, it overrides the positional
+  if "length" in named-args {
+    if type(named-args.at("length")) != int {
+      panic("Named length argument must be an integer")
+    }
+    length = named-args.at("length")
+  }
+
+  // Ensure length is non-negative
+  if length < 0 {
+    panic("length must be non-negative")
+  }
 
   // load builtin text or use custom text
   let text = custom-text
