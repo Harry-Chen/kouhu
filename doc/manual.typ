@@ -1,6 +1,6 @@
-#import "@preview/mantys:1.0.1": *
-#import "@preview/tidy:0.4.2"
-#import "@preview/cmarker:0.1.2"
+#import "@preview/mantys:1.0.2": *
+#import "@preview/tidy:0.4.3"
+#import "@preview/cmarker:0.1.8"
 
 #import "/lib.typ" as kouhu
 

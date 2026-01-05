@@ -28,6 +28,10 @@ GitHub Copilot says:
 
 ## Changelog
 
+### 0.2.1
+
+* Accept `length` as positional argument to `kouhu` (see: [#4](https://github.com/Harry-Chen/kouhu/pull/4)).
+
 ### 0.2.0
 
 * Rename misspelled parameter `indicies` to `indices`, and supports `int` as input (see: [#2](https://github.com/Harry-Chen/kouhu/pull/2)).
