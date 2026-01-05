@@ -26,7 +26,7 @@
 /// *Example 4:*
 /// Use positional length argument.
 /// #example(`#kouhu(100)`, mode: "markup")
-/// - length (int): Length of grapheme (characters) to print (positional or named). `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
+/// - length (int): Length of grapheme (characters) to print (positional or named). When used positionally, it must be the first argument. `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
 /// - builtin-text (string): Name of the builtin text, see `builtin-text-list` for a full list and length.
 /// - custom-text (array): Custom text to use. If not `none`, `builtin-text` will be ignored.
 /// - offset (int): Offset of the paragraph to start from.
@@ -45,7 +45,6 @@
   after-para: none,
   between-para: parbreak(),
 ) = {
-  
   // Handle positional and named length argument
   // Named 'length' overrides positional argument if both are provided
   let pos-args = args.pos()
@@ -55,11 +54,17 @@
   
   // If positional argument is provided, use it as length
   if pos-args.len() > 0 {
+    if type(pos-args.at(0)) != int {
+      panic("Positional length argument must be an integer")
+    }
     length = pos-args.at(0)
   }
   
   // If named 'length' is provided, it overrides the positional
   if "length" in named-args {
+    if type(named-args.at("length")) != int {
+      panic("Named length argument must be an integer")
+    }
     length = named-args.at("length")
   }
 
