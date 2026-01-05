@@ -26,7 +26,11 @@
 /// *Example 4:*
 /// Use positional length argument.
 /// #example(`#kouhu(100)`, mode: "markup")
+///
+/// *Positional arguments:*
 /// - length (int): Length of grapheme (characters) to print (positional or named). When used positionally, it must be the first argument. `kouhu` will repeat over selected paragraphs until `length` is reached, and the final paragraph will likely be truncated. 0 for unlimited, i.e. print all selected paragraphs for only once.
+///
+/// *Named arguments:*
 /// - builtin-text (string): Name of the builtin text, see `builtin-text-list` for a full list and length.
 /// - custom-text (array): Custom text to use. If not `none`, `builtin-text` will be ignored.
 /// - offset (int): Offset of the paragraph to start from.
@@ -53,6 +57,9 @@
   let length = 0  // default value
   
   // If positional argument is provided, use it as length
+  if pos-args.len() > 1 {
+    panic("kouhu accepts only one positional argument (length)")
+  }
   if pos-args.len() > 0 {
     if type(pos-args.at(0)) != int {
       panic("Positional length argument must be an integer")
@@ -66,6 +73,11 @@
       panic("Named length argument must be an integer")
     }
     length = named-args.at("length")
+  }
+
+  // Ensure length is non-negative
+  if length < 0 {
+    panic("length must be non-negative")
   }
 
   // load builtin text or use custom text
